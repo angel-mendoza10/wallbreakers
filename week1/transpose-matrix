@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> transpose(vector<vector<int>>& A)
+    {
+        vector<vector<int>> answer;
+        if(A.size() == 0)
+        {
+            return answer;
+        }
+        for(int i = 0; i < A[0].size(); ++i)
+        {
+            answer.push_back(vector<int>());
+        }
+        
+        for(int i = 0; i < A.size(); ++i)
+        {
+            for(int j = 0; j < A[i].size(); ++j)
+            {
+                answer[j].push_back(A[i][j]);
+            }
+        }
+        return answer;
+    }
+};
