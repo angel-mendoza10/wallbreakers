@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int titleToNumber(string s)
+    {
+        int answer = 0;
+        int len = s.length();
+        for(int i = 0; i < len; ++i)
+        {
+            answer = (answer * 26) + (s[i] - 64);
+        }
+        return answer;
+    }
+};
