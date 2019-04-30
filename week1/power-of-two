@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int isPowerOfTwo(int n)
+    {
+        long current = 1;
+        while(current <= n)
+        {
+            if(current == n)
+            {
+                return true;
+            }
+            current = current << 1;
+        }
+        return false;
+    }
+};
