@@ -1,0 +1,38 @@
+#include <locale>
+using namespace std;
+class Solution {
+public:
+    bool isPalindrome(string s)
+    {
+        int len = s.length();
+        char * current = &s[0];
+        char * end = &s[len - 1];
+        while(!isalnum(*current) && *current != '\0')
+        {
+            ++current;
+        }
+        while(!isalnum(*end) && end >= current)
+        {
+            --end;
+        }
+        
+        while(current < end)
+        {
+            while(!isalnum(*current))
+            {
+                ++current;
+            }
+            while(!isalnum(*end))
+            {
+                --end;
+            }
+            if(toupper(*current) != toupper(*end))
+            {
+                return false;
+            }
+            ++current;
+            --end;
+        }
+        return true;
+    }
+};
