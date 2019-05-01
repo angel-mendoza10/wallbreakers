@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string reverseWords(string s)
+    {
+        string answer;
+        char * current = &s[0];
+        char * ahead;
+        char * backtrack;
+        while(*current != '\0')
+        {
+            ahead = current;
+            while(*ahead != '\0' && *ahead != ' ')
+            {
+                ++ahead;
+            }
+            backtrack = ahead;
+            --backtrack;
+            while(backtrack != current)
+            {
+                answer.push_back(*backtrack);
+                --backtrack;
+            }
+            answer.push_back(*backtrack);
+            if(*ahead == ' ')
+            {
+                ++ahead;
+                answer.push_back(' ');
+            }
+            current = ahead;
+        }
+        return answer;
+    }
+};
