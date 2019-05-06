@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int hammingDistance(int x, int y)
+    {
+        long current = x ^ y;
+        int count = 0;
+        for(current; current > 0; current = current >> 1)
+        {
+            if(current & 1)
+            {
+                ++count;
+            }
+        }
+        return count;
+    }
+};
