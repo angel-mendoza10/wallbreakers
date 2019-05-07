@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target)
+    {
+        int len = nums.size();
+        map<int, int> answer;
+        map<int, int>::iterator meep = answer.end();
+        for(int i = 0; i < len; ++i)
+        {
+            if(answer.find(nums[i]) != meep)
+            {
+                vector<int> last;
+                last.push_back(answer.find(nums[i])->second);
+                last.push_back(i);
+                return last;
+            }
+            else
+            {
+                answer.insert({target - nums[i], i});
+                meep = answer.end();
+            }
+        }
+        return nums;
+    }
+};
