@@ -1,0 +1,51 @@
+class Solution {
+public:
+    bool is_valid(int row, int col, int len1, int len2)
+    {
+        return row < len1 && row >= 0 && col < len2 && col >= 0;
+    }
+    
+    void delete_island(vector<vector<char>>& grid, int row, int col, int len1, int len2)
+    {
+        grid[row][col] = '0';
+        if(is_valid(row - 1, col, len1, len2) && grid[row - 1][col] == '1')
+        {
+            delete_island(grid, row - 1, col, len1, len2);
+        }
+        if(is_valid(row + 1, col, len1, len2) && grid[row + 1][col] == '1')
+        {
+            delete_island(grid, row + 1, col, len1, len2);
+        }
+        if(is_valid(row, col - 1, len1, len2) && grid[row][col - 1] == '1')
+        {
+            delete_island(grid, row, col - 1, len1, len2);
+        }
+        if(is_valid(row, col + 1, len1, len2) && grid[row][col + 1] == '1')
+        {
+            delete_island(grid, row, col + 1, len1, len2);
+        }
+    }
+    
+    int numIslands(vector<vector<char>>& grid)
+    {
+        int count = 0;
+        int len1 = grid.size();
+        if(len1 == 0)
+        {
+            return 0;
+        }
+        int len2 = grid[0].size();
+        for(int i = 0; i < len1; ++i)
+        {
+            for(int j = 0; j < len2; ++j)
+            {
+                if(grid[i][j] == '1')
+                {
+                    ++count;
+                    delete_island(grid, i, j, len1, len2);
+                }
+            }
+        }
+        return count;
+    }
+};
