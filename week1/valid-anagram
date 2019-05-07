@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t)
+    {
+        int len1 = s.length();
+        int len2 = t.length();
+        if(len1 != len2)
+        {
+            return false;
+        }
+        multiset<char> meep;
+        for(int i = 0; i < len1; ++i)
+        {
+            meep.insert(s[i]);
+        }
+        for(int i = 0; i < len2; ++i)
+        {
+            multiset<char>::iterator found = meep.find(t[i]);
+            if(found == meep.end())
+            {
+                return false;
+            }
+            else
+            {
+                meep.erase(found);;
+            }
+        }
+        return meep.empty();
+    }
+};
