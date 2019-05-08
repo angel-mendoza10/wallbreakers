@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isHappy(int n)
+    {
+        long long count = 0;
+        int current = 0;
+        int digit;
+        while(count < 1000)
+        {
+            while(n > 0)
+            {
+                digit = n % 10;
+                n /= 10;
+                current += digit * digit;
+            }
+            if(current == 1)
+            {
+                return true;
+            }
+            n = current;
+            current = 0;
+            ++count;
+        }
+        return false;
+    }
+};
