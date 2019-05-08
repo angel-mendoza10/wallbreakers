@@ -1,0 +1,115 @@
+class Solution {
+public:
+    string convert(string word)
+    {
+        string answer = "";
+        int len = word.length();
+        for(int i = 0; i < len; ++i)
+        {
+            switch(word[i])
+            {
+                case 'a':
+                    answer += ".-";
+                    break;
+                case 'b':
+                    answer += "-...";
+                    break;
+                case 'c':
+                    answer += "-.-.";
+                    break;
+                case 'd':
+                    answer += "-..";
+                    break;
+                case 'e':
+                    answer += ".";
+                    break;
+                case 'f':
+                    answer += "..-.";
+                    break;
+                case 'g':
+                    answer += "--.";
+                    break;
+                case 'h':
+                    answer += "....";
+                    break;
+                case 'i':
+                    answer += "..";
+                    break;
+                case 'j':
+                    answer += ".---";
+                    break;
+                case 'k':
+                    answer += "-.-";
+                    break;
+                case 'l':
+                    answer += ".-..";
+                    break;
+                case 'm':
+                    answer += "--";
+                    break;
+                case 'n':
+                    answer += "-.";
+                    break;
+                case 'o':
+                    answer += "---";
+                    break;
+                case 'p':
+                    answer += ".--.";
+                    break;
+                case 'q':
+                    answer += "--.-";
+                    break;
+                case 'r':
+                    answer += ".-.";
+                    break;
+                case 's':
+                    answer += "...";
+                    break;
+                case 't':
+                    answer += "-";
+                    break;
+                case 'u':
+                    answer += "..-";
+                    break;
+                case 'v':
+                    answer += "...-";
+                    break;
+                case 'w':
+                    answer += ".--";
+                    break;
+                case 'x':
+                    answer += "-..-";
+                    break;
+                case 'y':
+                    answer += "-.--";
+                    break;
+                case 'z':
+                    answer += "--..";
+                    break;
+            }
+        }
+        return answer;
+    }
+    
+    int uniqueMorseRepresentations(vector<string>& words)
+    {
+        int count = 0;
+        vector<string> test;
+        int v_length = words.size();
+        set<string> combos;
+        set<string>::iterator check = combos.end();
+        string current_word;
+        for(int i = 0; i < v_length; ++i)
+        {
+            current_word = convert(words[i]);
+            test.push_back(current_word);
+            if(combos.find(current_word) == check)
+            {
+                ++count;
+                combos.insert(current_word);
+                check = combos.end();
+            }
+        }
+        return count;
+    }
+};
