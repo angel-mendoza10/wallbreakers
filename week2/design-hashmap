@@ -1,0 +1,54 @@
+class Solution {
+public:
+    bool wordPattern(string pattern, string str)
+    {
+        map<char, string> mapping;
+        vector<string> words;
+        int plen = pattern.length();
+        int slen = str.length();
+        string current = "";
+        for(int i = 0; i < slen; ++i)
+        {
+            if(str[i] != ' ')
+            {
+                current += str[i];
+            }
+            else if(current != "")
+            {
+                words.push_back(current);
+                current = "";
+            }
+        }
+        
+        if(str[slen - 1] != ' ')
+        {
+            words.push_back(current);
+        }
+        
+        int number_of_words = words.size();
+        
+        if(plen != number_of_words)
+        {
+            return false;
+        }
+        for(int i = 0; i < plen; ++i)
+        {
+            if(mapping.find(pattern[i]) == mapping.end())
+            {
+                for(pair<char, string> combo : mapping)
+                {
+                    if(combo.second == words[i])
+                    {
+                        return false;
+                    }
+                }
+                mapping[pattern[i]] = words[i];
+            }
+            else if(mapping[pattern[i]] != words[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+};
