@@ -1,0 +1,35 @@
+class Solution {
+public:
+    string convert(string s, char a, char b)
+    {
+        int len = s.length();
+        for(int i = 0; i < len; ++i)
+        {
+            if(s[i] == a)
+            {
+                s[i] = b;
+            }
+        }
+        return s;
+    }
+    
+    bool isIsomorphic(string s, string t)
+    {
+        map<char, char> mapping;
+        set<char> already_mapped;
+        int slen = s.length();
+        for(int i = 0; i < slen; ++i)
+        {
+            if(already_mapped.find(t[i]) != already_mapped.end() || mapping.find(s[i]) != mapping.end())
+            {
+                if(mapping[s[i]] != t[i])
+                {
+                    return false;
+                }
+            }
+            already_mapped.insert(t[i]);
+            mapping[s[i]] = t[i];
+        }
+        return true;
+    }
+};
