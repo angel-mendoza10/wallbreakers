@@ -1,0 +1,49 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p)
+    {
+        vector<int> answer;
+        map<char, int> letters;
+        map<char, int> checker;
+        int plen = p.length();
+        for(int i = 0; i < plen; ++i)
+        {
+            ++letters[p[i]];
+        }
+        
+        int slen = s.length();
+        if(slen < plen)
+        {
+            return vector<int>();
+        }
+        int current_begin_index = 0;
+        int current_end_index = plen - 1;
+        for(int i = 0; i < plen; ++i)
+        {
+            ++checker[s[i]];
+        }
+        if(checker == letters)
+        {
+            answer.push_back(current_begin_index);
+        }
+        ++current_begin_index;
+        ++current_end_index;
+        while(current_end_index < slen)
+        {
+            --checker[s[current_begin_index - 1]];
+            if(checker[s[current_begin_index - 1]] == 0)
+            {
+                checker.erase(s[current_begin_index - 1]);
+            }
+            ++checker[s[current_end_index]];
+            if(checker == letters)
+            {
+                answer.push_back(current_begin_index);
+            }
+            ++current_begin_index;
+            ++current_end_index;
+        }
+        
+        return answer;
+    }
+};
