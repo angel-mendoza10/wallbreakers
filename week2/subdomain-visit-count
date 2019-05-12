@@ -1,0 +1,46 @@
+class Solution {
+public:
+    vector<string> subdomainVisits(vector<string>& cpdomains)
+    {
+        vector<string> answer;
+        map<string, int> counter;
+        int dlen = cpdomains.size();
+        string current_string;
+        int slen;
+        int visits;
+        int current_index;
+        for(int i = 0; i < dlen; ++i)
+        {
+            visits = 0;
+            current_index = 0;
+            current_string = cpdomains[i];
+            slen = current_string.length();
+            while(isdigit(current_string[current_index]))
+            {
+                visits *= 10;
+                visits += current_string[current_index++] - 48;
+            }
+            while(current_string[current_index] == ' ')
+            {
+                ++current_index;
+            }
+            while(current_index < slen)
+            {
+                counter[current_string.substr(current_index, slen)] += visits;
+                while(current_string[current_index] != '.' && current_index < slen)
+                {
+                    ++current_index;
+                }
+                ++current_index;
+            }
+        }
+        for(pair<string, int> meep : counter)
+        {
+            current_string = "";
+            current_string += to_string(meep.second);
+            current_string += " " + meep.first;
+            answer.push_back(current_string);
+        }
+        return answer;
+    }
+};
