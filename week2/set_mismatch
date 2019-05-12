@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums)
+    {
+        vector<int> answer;
+        int sum = 0;
+        long real_sum = 0;
+        long sum_squared = 0;
+        long real_sum_squared = 0;
+        long len = nums.size();
+        for(int i = 0; i < len; ++i)
+        {
+            sum += nums[i];
+            real_sum += i + 1;
+            sum_squared += nums[i] * nums[i];
+            real_sum_squared += (i + 1) * (i + 1);
+        }
+        int diff = sum - real_sum;
+        int diff_squared = sum_squared - real_sum_squared;
+        answer.push_back((diff + diff_squared / diff) / 2);
+        answer.push_back(answer[0]- diff);
+        
+        return answer;
+    }
+};
