@@ -1,0 +1,62 @@
+class Solution {
+public:
+    string tolower(string s)
+    {
+        string answer = "";
+        int len = s.length();
+        for(int i = 0; i < len; ++i)
+        {
+            if(s[i] >= 65 && s[i] <= 90)
+            {
+                s[i] += 32;
+            }
+            answer += s[i];
+        }
+        return answer;
+    }
+    
+    static bool pairgt(pair<string, int> a, pair<string, int> b)
+    {
+        return a.second < b.second;
+    }
+    
+    string mostCommonWord(string paragraph, vector<string>& banned)
+    {
+        map<string, int> counter;
+        set<string> ban_words;
+        for(string word : banned)
+        {
+            ban_words.insert(word);
+        }
+        int len = paragraph.length();
+        string current = "";
+        for(int i = 0; i < len; ++i)
+        {
+            if(paragraph[i] != ' ' && paragraph[i] != ',' && paragraph[i] != '.' && paragraph[i] != '!' && paragraph[i] != '?' && paragraph[i] != ';' && paragraph[i] != '\'')
+            {
+                current += paragraph[i];
+            }
+            else if(current != "")
+            {
+                if(ban_words.find(tolower(current)) == ban_words.end())
+                {
+                    ++counter[tolower(current)];
+                }
+                current = "";
+            }
+        }
+        if(paragraph[len - 1] != ' ' && paragraph[len - 1] != ',' && paragraph[len - 1] != '.' && paragraph[len - 1] != '!' && paragraph[len - 1] != '?' && paragraph[len - 1] != ';' && paragraph[len - 1] != '\'')
+        {
+            if(ban_words.find(tolower(current)) == ban_words.end())
+            {
+                ++counter[tolower(current)];
+            }
+        }
+        priority_queue<pair<string, int>, vector<pair<string, int>>, std::function<bool(pair<string, int>, pair<string, int>)>> answer(pairgt);
+        for(pair<string, int> meep : counter)
+        {
+            answer.push(meep);
+        }
+        return answer.top().first;
+    }
+};
