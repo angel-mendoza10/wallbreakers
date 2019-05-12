@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int firstUniqChar(string s)
+    {
+        map<char, pair<int, int>> check;
+        int len = s.length();
+        for(int i = 0; i < len; ++i)
+        {
+            ++check[s[i]].first;
+            check[s[i]].second = i;
+        }
+        int smallest = len;
+        for(pair<char, pair<int, int>> thing : check)
+        {
+            if(thing.second.first == 1 && thing.second.second < smallest)
+            {
+                smallest = thing.second.second;
+            }
+        }
+        if(smallest < len)
+        {
+            return smallest;
+        }
+        return -1;
+    }
+};
