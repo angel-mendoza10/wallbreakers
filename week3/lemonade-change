@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool lemonadeChange(vector<int>& bills)
+    {
+        map<int, int> change;
+        int len = bills.size();
+        int bill;
+        for(int i = 0; i < len; ++i)
+        {
+            bill = bills[i];
+            ++change[bill];
+            bill -= 5;
+            while(change[10] > 0 && bill >= 10)
+            {
+                bill -= 10;
+                --change[10];
+            }
+            while(change[5] > 0 && bill >= 5)
+            {
+                bill -= 5;
+                --change[5];
+            }
+            if(bill != 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+};
