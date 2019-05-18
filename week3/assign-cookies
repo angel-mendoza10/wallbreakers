@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int findContentChildren(vector<int>& g, vector<int>& s)
+    {
+        int answer = 0;
+        sort(g.begin(), g.end());
+        sort(s.begin(), s.end());
+        int glen = g.size() - 1;
+        int slen = s.size() - 1;
+        while(glen >= 0 && slen >= 0)
+        {
+            if(g[glen--] <= s[slen])
+            {
+                ++answer;
+                --slen;
+            }
+        }
+        return answer;
+    }
+};
