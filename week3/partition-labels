@@ -1,0 +1,43 @@
+class Solution {
+public:
+    vector<int> partitionLabels(string S)
+    {
+        vector<int> res;
+        int n = S.length();
+        if(n < 2) return {n};
+        string curr = "";
+        string rest_s = S;
+        int pos = 0;
+        int prev_pos = 0;
+        while(pos<rest_s.size()) {
+            if(curr == ""&&rest_s.size()!=0) {
+                curr += rest_s[0];
+            }
+            cout << "finding last of " << curr << endl;
+            pos = rest_s.find_last_of(curr);
+            cout << "pos is " << pos << endl;
+            //find first cluster
+            if(pos == prev_pos) {
+                cout << "pos and prev_pos is ==" << endl;
+                res.push_back(curr.size());
+                //update rest_s
+                rest_s = rest_s.substr(curr.size());
+                curr.clear();//reset the search string
+                pos = 0;//clear pos
+                prev_pos = pos;//clear prev pos
+                continue;
+            }
+            //rest of string all contains 
+            if(pos == string::npos) {
+                cout << "end of the string" << endl;
+                res.push_back(rest_s.size());
+                break;
+            }
+            cout << "updating curr from " << curr;
+            curr = rest_s.substr(0, pos + 1);//update curr string
+            cout << " to " << curr << endl;
+            prev_pos = pos;
+        }
+        return res; 
+    }
+};
