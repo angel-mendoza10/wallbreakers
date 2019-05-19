@@ -1,0 +1,30 @@
+class Solution {
+public:
+    static bool sort_points(vector<int> a, vector<int> b)
+    {
+        if(a[1] != b[1])
+        {
+            return a[1] < b[1];
+        }
+        return a[0] < b[0];
+    }
+    
+    int findMinArrowShots(vector<vector<int>>& points)
+    {
+        int answer = 0;
+        int current = 0;
+        int len = points.size();
+        int shoot;
+        sort(points.begin(), points.end(), sort_points);
+        while(current < len)
+        {
+            shoot = points[current][1];
+            while(current < len && points[current][0] <= shoot && shoot <= points[current][1])
+            {
+                ++current;
+            }
+            ++answer;
+        }
+        return answer;
+    }
+};
