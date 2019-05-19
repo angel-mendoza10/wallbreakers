@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target)
+    {
+        int right = nums.size() - 1;
+        int left = 0;
+        int mid;
+        while (left <= right)
+        {
+            mid = (left + right) / 2;
+            cout << "left " << left << endl;
+            cout << "right " << right << endl;
+            cout << "mid " << mid << endl;
+            if(nums[mid] == target)
+            {
+                return mid;
+            }
+            else if(target < nums[mid])
+            {
+                right = mid - 1;
+            }
+            else
+            {
+                left = mid + 1;
+            }
+        }
+        return -1;
+    }
+};
