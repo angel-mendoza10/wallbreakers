@@ -1,0 +1,38 @@
+class Solution {
+public:
+    static bool sort_interval(vector<int> a, vector<int> b)
+    {
+        if(a[0] == b[0])
+        {
+            return a[1] < b[1];
+        }
+        return a[0] < b[0];
+    }
+    
+    vector<vector<int>> merge(vector<vector<int>>& intervals)
+    {
+        vector<vector<int>> answer;
+        sort(intervals.begin(), intervals.end(), sort_interval);
+        int current = 0;
+        int len = intervals.size();
+        int end_interval;
+        vector<int> curr_interval;
+        while(current < len)
+        {
+            curr_interval.clear();
+            end_interval = intervals[current][1];
+            curr_interval.push_back(intervals[current][0]);
+            while(current < len && end_interval >= intervals[current][0])
+            {
+                if(intervals[current][1] > end_interval)
+                {
+                    end_interval = intervals[current][1];
+                }
+                ++current;
+            }
+            curr_interval.push_back(end_interval);
+            answer.push_back(curr_interval);
+        }
+        return answer;
+    }
+};
