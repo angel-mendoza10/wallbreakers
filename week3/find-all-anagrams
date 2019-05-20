@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p)
+    {
+        vector<int> answer;
+        sort(p.begin(), p.end());
+        int slen = s.length();
+        int plen = p.length();
+        int difference = slen - plen;
+        string current = s.substr(0, plen);
+        sort(current.begin(), current.end());
+        if(current == p)
+        {
+            answer.push_back(0);
+        }
+        int start = 1;
+        while(start <= difference)
+        {
+            if(s[start - 1] != s[start + plen - 1])
+            {
+                cout << "left behind " << s[start - 1] << " and got a " << s[start + plen - 1] << endl;
+                current = s.substr(start, plen);
+                sort(current.begin(), current.end());
+            }
+            if(current == p)
+            {
+                answer.push_back(start);
+            }
+            ++start;
+        }
+        
+        return answer;
+    }
+};
