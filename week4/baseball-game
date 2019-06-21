@@ -1,0 +1,52 @@
+class Solution {
+public:
+    int calPoints(vector<string>& ops)
+    {
+        stack<int> scores;
+        for(string op : ops)
+        {
+            if(op == "C")
+            {
+                if(scores.empty())
+                {
+                    cout << "C error" << endl;
+                    return -1;
+                }
+                scores.pop();
+            }
+            else if(op == "D")
+            {
+                if(scores.empty())
+                {
+                    cout << "D error" << endl;
+                    return -1;
+                }
+                scores.push(scores.top() * 2);
+            }
+            else if(op == "+")
+            {
+                if(scores.size() < 2)
+                {
+                    cout << "+ error" << endl;
+                    return -1;
+                }
+                int temp = scores.top();
+                scores.pop();
+                int new_score = scores.top() + temp;
+                scores.push(temp);
+                scores.push(new_score);
+            }
+            else
+            {
+                scores.push(stoi(op));
+            }
+        }
+        int sum = 0;
+        while(!scores.empty())
+        {
+            sum += scores.top();
+            scores.pop();
+        }
+        return sum;
+    }
+};
